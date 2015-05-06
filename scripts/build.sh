@@ -5,10 +5,10 @@ webpack=node_modules/.bin/webpack
 
 rm -rf build
 
-$babel -d build/lib ./modules
+$babel -d build ./modules
 cp README.md build/
-find -X build/lib -type d -name __tests__ | xargs rm -rf
-node -p 'p=require("./package");p.main="lib";p.scripts=p.devDependencies=undefined;JSON.stringify(p,null,2)' > build/package.json
+find -X build -type d -name __tests__ | xargs rm -rf
+node -p 'p=require("./package");p.main="index.js";p.scripts=p.devDependencies=undefined;JSON.stringify(p,null,2)' > build/package.json
 
 NODE_ENV=production $webpack modules/index.js build/umd/ReactRouter.js
 NODE_ENV=production COMPRESS=1 $webpack modules/index.js build/umd/ReactRouter.min.js
